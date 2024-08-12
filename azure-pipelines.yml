@@ -1,19 +1,8 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
 
-trigger:
-- main
-
-pool:
-  vmImage: ubuntu-latest
-
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+FROM ubi8
+RUN yum  install httpd -y
+CMD systemctl enable httpd
+CMD systemctl start httpd
+RUN echo "<html> <head> IOB-OCP Training 2024</head> <body> <h1>Welcome to IOB Bank-Chennai</h1> </body> </html>" >/var/www/html/index.html
+EXPOSE 80/tcp
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
